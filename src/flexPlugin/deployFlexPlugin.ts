@@ -1,6 +1,6 @@
 import { getPaths } from "../utils";
 import { hashElement } from 'folder-hash';
-import * as childProcess from 'child_process';
+import * as util from 'util';
 
 const setDeployFlags = (attributes:any):string[] => {
 
@@ -41,6 +41,8 @@ const setReleaseFlags = (attributes:any, packageJson:any):string[] => {
 
 export const deployFlexPlugin = async (attributes: any) => {
 
+    const execFile = util.promisify(require('child_process').execFile);
+
     try {
 
         const { absolutePath } = getPaths(attributes.cwd);
@@ -50,7 +52,7 @@ export const deployFlexPlugin = async (attributes: any) => {
             ...(attributes.env || {})
         };
 
-        await childProcess.execFileSync('twilio', [
+        await execFile('twilio', [
             'flex:plugins:deploy',
             `--changelog=${attributes.changelog || 'deployed by infra as code'}`,
             ...setDeployFlags(attributes)
@@ -67,7 +69,7 @@ export const deployFlexPlugin = async (attributes: any) => {
 
             if(pluginPackageJson) {
 
-                await childProcess.execFileSync('twilio', [
+                await execFile('twilio', [
                     'flex:plugins:release', 
                     `--enable-plugin=${pluginPackageJson.name}@latest`,
                     ...setReleaseFlags(attributes.release, pluginPackageJson)
