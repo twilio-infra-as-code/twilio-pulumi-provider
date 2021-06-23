@@ -1,4 +1,3 @@
-import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
 import { TwilioServerlessApiClient } from '@twilio-labs/serverless-api';
@@ -9,7 +8,10 @@ import { isEqual } from 'lodash';
 export const getEnv = (path:string) => {
  
   if (fs.existsSync(path)) {
-     return dotenv.parse(fs.readFileSync(path, 'utf8').toString())
+
+    const dotenv = require('dotenv').config({ path: path });
+    return dotenv.parsed;
+
   }
  
  return {};
