@@ -31,6 +31,36 @@ npm install @pulumi/pulumi
 
 For a list of repository templates that show you how to use Pulumi for deploying your Twilio projects, see the [Examples repo](https://github.com/twilio-infra-as-code/examples).
 
+# Documentation 
+
+## Products coverage 
+
+Below the list of Twilio products and their readiness
+
+| Product | Implementation | Test | Samples |
+|---|---|---|---|
+|Taskrouter| :white_check_mark: | Manual :white_check_mark: | [Taskrouter Contact Center](https://github.com/twilio-infra-as-code/taskrouter-contact-center)|
+|Serverless| :white_check_mark: | :construction: |  |
+|Studio| :white_check_mark: | :construction: |  |
+
+
+
+## Paths 
+
+### Taskrouter 
+
+| Path | Description |
+|---|----|
+|`['taskroter', 'workspaces']`| Taskrouter Workspace |
+| `['taskrouter', { workspaces: <workspace SID> }, 'taskQueues']`| Taskrouter task queue |
+| `['taskrouter', { workspaces: <workspace SID> }, 'workers']`| Taskrouter worker |
+| `['taskrouter', { workspaces: <workspace SID> }, 'workflows']`| Taskrouter workflow |
+
+### Studio 
+
+| Path | Description |
+|---|----|
+| |  |
 
 ## More about the project
 
